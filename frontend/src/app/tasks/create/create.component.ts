@@ -72,7 +72,7 @@ imageToDataUrl(file:File){
   }
   reader.readAsDataURL(file);
 }
-
+ //nice
   onSaveTask(){
     if(!this.taskForm.valid){
       return;
