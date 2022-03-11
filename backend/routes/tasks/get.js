@@ -11,19 +11,21 @@ getById:(req, res, next) => {
     })
     
 },getAll:(req, res, next) => {
-    const pageSize=req.query.pagesize;
-    const currentPage=req.query.currentpage;
+   
+    const pageSize= +req.query.pagesize;
+    const currentPage= +req.query.currentpage;
     const taskQuery=Task.find();
-    if(pageSize&&currentPage){
-        taskQuery.skip(pageSize*(currentPage-1))
-        .limit
+    if(pageSize && (currentPage)>-1 ){
+        taskQuery.skip( pageSize * (currentPage))
+        .limit(pageSize)
     }
-    taskQuery.find().then(tasks=>{
+    taskQuery.find().then(async tasks=>{
         res.json({
             status: {
                 messange: "sucessfull",
                 code: 200
-            }, data: tasks
+            }, data: tasks,
+            totalCount:await Task.count()
         });
     })
     

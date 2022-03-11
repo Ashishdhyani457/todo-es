@@ -1,7 +1,7 @@
 
 const express=require('express');
 const router=express.Router({mergeParam:true});
-
+const checkAuth=require("../../middleware/check-auth");
 const multer=require('multer');
 const MINE_TYPE_MAP={
 'image/png':'png',
@@ -31,7 +31,9 @@ let del=require('./delete');
 
 router.get('/',get.getAll);
 router.get('/:id',get.getById);
-router.post('/',multer({storage:storage}).single('image'),post.createTask);
-router.put('/:id',multer({storage:storage}).single('image'),put.updateTask);
-router.delete('/:id',del.deleteTask);
+
+
+router.post('/',checkAuth,multer({storage:storage}).single('image'),post.createTask);
+router.put('/:id',checkAuth,multer({storage:storage}).single('image'),put.updateTask);
+router.delete('/:id',checkAuth,del.deleteTask);
 module.exports=router;

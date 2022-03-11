@@ -48,16 +48,16 @@ this.taskService.getTask(this.taskId).subscribe((resp)=>{
   })
 })
 
-      }else{
-        this.taskForm=new FormGroup({
-          'title':new FormControl(null,{validators:[Validators.required,Validators.minLength(5)]}),
-          'description':new FormControl(null,{validators:[Validators.required]}),
-          'image': new FormControl(null,{validators:[Validators.required,imageTypeValidator]})
-            })
-        this.mode='Create';
-          this.taskId=null;
-      }
-    })
+}else{
+  this.taskForm=new FormGroup({
+    'title':new FormControl(null,{validators:[Validators.required,Validators.minLength(5)]}),
+    'description':new FormControl(null,{validators:[Validators.required]}),
+    'image': new FormControl(null,{validators:[Validators.required,imageTypeValidator]})
+      })
+  this.mode='Create';
+    this.taskId=null;
+}
+})
 }
 onImagePicked(event:Event){
 const file=(event.target as HTMLInputElement ).files[0];
@@ -72,7 +72,7 @@ imageToDataUrl(file:File){
   }
   reader.readAsDataURL(file);
 }
- //nice
+
   onSaveTask(){
     if(!this.taskForm.valid){
       return;
