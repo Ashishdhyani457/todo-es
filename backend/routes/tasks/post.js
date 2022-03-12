@@ -7,7 +7,8 @@ createTask: (req, res, next) => {
     const task = new Task({
         title: req.body.title,
         description: req.body.description,
-        imagePath: url + '/images/' + req.file.filename
+        imagePath: url + '/images/' + req.file.filename,
+        creator: req.userData.userId
     })
     task.save();
     console.log(task);

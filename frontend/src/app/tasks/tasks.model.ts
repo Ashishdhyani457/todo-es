@@ -3,4 +3,5 @@ export interface Task{
     title: String;
     description: String;
     imagePath:string;
+    creator:string;
 }

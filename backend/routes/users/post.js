@@ -18,7 +18,8 @@ module.exports = {
                             code: 201
                         }, data: {
                             token:token,
-                            expiresIn:3600
+                            expiresIn:3600,
+                            userId:user._id
                         }
                     });
 
@@ -59,6 +60,7 @@ module.exports = {
                 email: req.body.email,
                 password: hash
             });
+        
             const result = await user.save();
             res.json({
                 status: {

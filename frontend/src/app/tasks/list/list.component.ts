@@ -21,6 +21,7 @@ totalTasks=0;
 pageIndex=0;
 pageSize=5;
 pageSizeOptions=[1,5,10,100];
+userId="";
 
   private tasksSub!: Subscription;
 
@@ -38,10 +39,11 @@ ngOnInit(){
       this.totalTasks=taskData.totalCount;
     })
 
-
+    this.userId=this.authService.getUserId();
     this.userIsAuthenticated=this.authService.getAuthStatus();
     this.authListnerSubs=this.authService.getAuthStatusListner().subscribe(isAuthenticated=>{
       this.userIsAuthenticated=isAuthenticated;
+      this.userId=this.authService.getUserId();
     })
 
 }
