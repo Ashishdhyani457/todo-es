@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path=require('path');
-mongoose.connect("mongodb+srv://pwr:mGHtMLPW8ByACXmK@cluster0.pb8zt.mongodb.net/todolist-mean?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGODB_ATLAS_URL)
     .then(() => {
         console.log("connected sucesssfully")
     })

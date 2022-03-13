@@ -10,7 +10,7 @@ module.exports = {
             if (user) {
                 const compareStatus = await bcrypt.compare(req.body.password, user.password)
                 if (compareStatus) {
-                    const token = jwt.sign({ email: user.email, userId: user._id },"your_strong_salt_secret",
+                    const token = jwt.sign({ email: user.email, userId: user._id },process.env.JWT_KEY,
                         { expiresIn : "1h" });
                     res.json({
                         status: {
