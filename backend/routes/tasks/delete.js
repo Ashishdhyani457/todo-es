@@ -13,7 +13,7 @@ deleteTask:(req,res,next)=>{
         if(result.deletedCount>0){
             res.json({
                 status: {
-                    messange: "sucessfull",
+                    message: "sucessfull",
                     code: 201
                 }
             });
@@ -21,13 +21,20 @@ deleteTask:(req,res,next)=>{
         else{
             res.status(401).json({
                 status: {
-                    messange: "Auth failed",
+                    message: "Auth failed",
                     code: 401
                 }
             });
         }
    
 
+    }).catch(e=>{
+        res.status(500).json({
+            status: {
+                message: e.message,
+                code: 500
+            }
+        });
     })
 } 
 }

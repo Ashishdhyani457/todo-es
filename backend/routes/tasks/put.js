@@ -18,7 +18,7 @@ updateTask: (req,res,next)=>{
         if(result.modifiedCount>0){
             res.json({
                 status: {
-                    messange: "sucessfull",
+                    message: "sucessfull",
                     code: 201
                 }, data: task
             });
@@ -26,12 +26,19 @@ updateTask: (req,res,next)=>{
         else{
             res.status(401).json({
                 status: {
-                    messange: "Auth failed",
+                    message: "Auth failed",
                     code: 401
                 }, data: task
             });
         }
    
+    }).catch(e=>{
+        res.status(500).json({
+            status: {
+                message: e.message,
+                code: 500
+            }
+        });
     })
 
 }

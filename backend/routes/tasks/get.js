@@ -4,9 +4,16 @@ getById:(req, res, next) => {
     Task.findById(req.params.id).then(task=>{
         res.json({
             status: {
-                messange: "sucessfull",
+                message: "sucessfull",
                 code: 200
             }, data: task
+        });
+    }).catch(e=>{
+        res.status(500).json({
+            status: {
+                message: e.message,
+                code: 500
+            }
         });
     })
     
@@ -22,10 +29,17 @@ getById:(req, res, next) => {
     taskQuery.find().then(async tasks=>{
         res.json({
             status: {
-                messange: "sucessfull",
+                message: "sucessfull",
                 code: 200
             }, data: tasks,
             totalCount:await Task.count()
+        });
+    }).catch(e=>{
+        res.status(500).json({
+            status: {
+                message: e.message,
+                code: 500
+            }
         });
     })
     

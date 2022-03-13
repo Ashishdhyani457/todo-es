@@ -10,7 +10,14 @@ createTask: (req, res, next) => {
         imagePath: url + '/images/' + req.file.filename,
         creator: req.userData.userId
     })
-    task.save();
+    task.save().catch(e=>{
+        res.status(500).json({
+            status: {
+                message: e.message,
+                code: 500
+            }
+        });
+    });
     console.log(task);
     res.json({
         status: {

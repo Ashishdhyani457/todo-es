@@ -29,7 +29,10 @@ export class AuthService {
     createUser(authData: AuthData) {
         this.http.post("http://localhost:3000/api/users/signup", authData).subscribe(resp => {
             console.log(resp);
-            this.router.navigate(['/'])
+            this.router.navigate(['/']);
+        },error=>{
+            console.log(error);
+            this.authStatusListner.next(false);
         })
     }
     autoAuthUser(){
@@ -66,7 +69,10 @@ export class AuthService {
                 this.router.navigate(['/'])
             }
 
-        })
+        },error=>{
+            console.log(error);
+            this.authStatusListner.next(false);
+        });
     }
     logout() {
         this.token = null;
